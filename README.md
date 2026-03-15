@@ -1,146 +1,184 @@
-# ⚡ Nexa Content Studio
+# Nexa Content Studio
 
-> **"Create Viral Content with AI"**
+Nexa Content Studio is a Next.js dashboard for generating short-form AI video projects. It includes a frontend dashboard, an Express backend, local asset storage, script generation, thumbnail generation, and a local-first video pipeline.
 
-A premium AI-powered SaaS dashboard for generating YouTube Shorts, cartoon videos, thumbnails, and content ideas — automatically.
+## What it does
 
----
+- Generate short video scripts from an idea
+- Create branded vertical thumbnails
+- Save generated projects to a video library
+- Run in paid mode with OpenAI or in free/local mode with Ollama
+- Render local MP4 videos when FFmpeg is installed
 
-## 🚀 Quick Start
+## Tech stack
+
+- Next.js 14
+- React 18
+- TypeScript
+- Express
+- OpenAI SDK
+- Ollama for local open-source models
+- FFmpeg for video rendering
+
+## Project structure
+
+```text
+nexa-content-studio/
+├── backend/
+│   ├── controllers/
+│   ├── routes/
+│   ├── services/
+│   └── server.js
+├── public/
+├── src/
+│   ├── app/
+│   └── components/
+└── uploads/
+    ├── audio/
+    ├── thumbnails/
+    └── videos/
+```
+
+## Install
 
 ```bash
-# 1. Install dependencies
 npm install
+```
 
-# 2. Run development server
+## Environment
+
+Copy [.env.example](/Users/ajinb/Desktop/nexa-content-studio/.env.example) to `.env` and choose one of the modes below.
+
+### Free local mode with Ollama
+
+```env
+BACKEND_PORT=4000
+NEXT_PUBLIC_API_BASE_URL=http://localhost:4000/api
+NEXA_AI_PROVIDER=ollama
+OLLAMA_BASE_URL=http://127.0.0.1:11434
+OLLAMA_MODEL=llama3.2:3b
+NEXA_FREE_MODE=false
+```
+
+### Built-in fallback mode
+
+This mode works without OpenAI, Ollama, or paid APIs. It generates a local demo script and saves projects, but the script quality is simpler.
+
+```env
+BACKEND_PORT=4000
+NEXT_PUBLIC_API_BASE_URL=http://localhost:4000/api
+NEXA_FREE_MODE=true
+NEXA_AI_PROVIDER=auto
+```
+
+### OpenAI mode
+
+```env
+OPENAI_API_KEY=your_openai_api_key
+OPENAI_MODEL=gpt-4.1-mini
+BACKEND_PORT=4000
+NEXT_PUBLIC_API_BASE_URL=http://localhost:4000/api
+NEXA_FREE_MODE=false
+NEXA_AI_PROVIDER=auto
+```
+
+## Run the app
+
+Start the backend:
+
+```bash
+npm run backend:start
+```
+
+Start the frontend in another terminal:
+
+```bash
 npm run dev
+```
 
-# 3. Open in browser
+Then open:
+
+```text
 http://localhost:3000
 ```
 
----
+## Free local AI setup
 
-## 📁 Project Structure
+Install Ollama:
 
-```
-nexa-content-studio/
-├── src/
-│   ├── app/
-│   │   ├── login/          → Login page
-│   │   ├── dashboard/      → Main dashboard
-│   │   ├── create/         → Video generator (4 modes)
-│   │   ├── library/        → Video library
-│   │   ├── thumbnails/     → Thumbnail generator
-│   │   ├── channels/       → Channel manager
-│   │   └── settings/       → API keys, automation
-│   └── components/
-│       ├── Sidebar.tsx      → Collapsible sidebar nav
-│       ├── Navbar.tsx       → Top bar with notifications
-│       ├── DashboardLayout.tsx → Main layout wrapper
-│       ├── Companion.tsx    → Floating AI chat assistant
-│       └── CommandPalette.tsx → Press "/" for commands
+```bash
+brew install ollama
+ollama pull llama3.2:3b
+ollama serve
 ```
 
----
+With that running, Nexa can generate scripts locally for free.
 
-## ✨ Features
+## Local video rendering
 
-| Feature | Status |
-|---|---|
-| Login page (futuristic) | ✅ |
-| Dark / Light theme toggle | ✅ |
-| Collapsible sidebar | ✅ |
-| Dashboard with stats & charts | ✅ |
-| Video generation (4 modes) | ✅ |
-| Video Library with filters | ✅ |
-| Thumbnail Generator | ✅ |
-| Channel Manager | ✅ |
-| Settings + API key inputs | ✅ |
-| AI Companion chat widget | ✅ |
-| Command Palette (press `/`) | ✅ |
-| Notification system | ✅ |
-| Micro-interactions & animations | ✅ |
-| Automation scheduler (placeholder) | ✅ |
-| YouTube auto-upload (placeholder) | 🔜 |
-| Trending topic finder (placeholder) | 🔜 |
+Install FFmpeg to render MP4 files:
 
----
-
-## 🎨 Design System
-
-| Token | Value |
-|---|---|
-| Primary font | Syne (headings) + DM Sans (body) |
-| Accent 1 | `#6366f1` (Indigo) |
-| Accent 2 | `#a855f7` (Purple) |
-| Accent 3 | `#06b6d4` (Cyan) |
-| Background | `#05050f` (dark) / `#f8f8fc` (light) |
-| Cards | Glassmorphism (`backdrop-filter: blur`) |
-
----
-
-## 🔌 API Integrations (Placeholder)
-
-Connect these in **Settings → API Keys**:
-
-- **OpenAI** — Script & idea generation
-- **ElevenLabs** — AI voice synthesis
-- **Pexels** — Stock footage & images
-- **YouTube** — Upload automation (coming soon)
-
----
-
-## ⌨️ Keyboard Shortcuts
-
-| Shortcut | Action |
-|---|---|
-| `/` | Open command palette |
-| `ESC` | Close command palette |
-| `↑ ↓` | Navigate commands |
-| `Enter` | Execute command |
-
----
-
-## 🤖 Nexa Companion Commands
-
-Type these in the chat widget:
-
-- `"Go to video generator"` → Navigates to /create
-- `"Open video library"` → Navigates to /library
-- `"Create cartoon video"` → Opens cartoon mode
-- `"How do I generate shorts?"` → Explains the process
-
----
-
-## 🛠️ Tech Stack
-
-- **Next.js 14** (App Router)
-- **React 18**
-- **TypeScript**
-- **TailwindCSS**
-- **Recharts** (area charts)
-- **Lucide React** (icons)
-- **Custom CSS** (glassmorphism, animations)
-
----
-
-## 🔧 Customization
-
-### Change accent color
-In `src/app/globals.css`, update:
-```css
---accent-1: #6366f1; /* primary */
---accent-2: #a855f7; /* secondary */
---accent-3: #06b6d4; /* tertiary */
+```bash
+brew install ffmpeg
 ```
 
-### Add new sidebar item
-In `src/components/Sidebar.tsx`, add to `navItems`:
-```ts
-{ icon: YourIcon, label: 'New Page', path: '/new-page' }
+Without FFmpeg, Nexa still saves the script, thumbnail, and project metadata, but the video entry will stay in a partial state and no MP4 will be created.
+
+On macOS, Nexa can also use the built-in `say` command for simple narration if available.
+
+## API routes
+
+Backend base URL:
+
+```text
+http://localhost:4000/api
 ```
 
----
+Available routes:
 
-Built with ❤️ by Nexa Studio
+- `POST /generate-script`
+- `POST /generate-thumbnail`
+- `POST /generate-video`
+- `GET /videos`
+
+Health checks:
+
+- `GET /`
+- `GET /health`
+- `GET /api`
+
+## Main pages
+
+- `/dashboard` - overview and stats
+- `/create` - generate a new video project
+- `/library` - browse saved generated projects
+- `/thumbnails` - thumbnail tools UI
+- `/channels` - channel management UI
+- `/settings` - app settings UI
+
+## Current behavior
+
+- `/create` calls the backend and saves generated projects
+- `/library` loads real project metadata from `uploads/videos/videos.json`
+- thumbnails are stored in `uploads/thumbnails`
+- videos are stored in `uploads/videos`
+
+## Notes
+
+- `.env` is ignored by Git and should stay local
+- `node_modules` and `.next` are ignored by Git
+- Google Fonts optimization may warn during local builds if network access is restricted
+
+## Build
+
+```bash
+npm run build
+```
+
+## GitHub
+
+Remote repository:
+
+```text
+https://github.com/ajinbiju2001/Nexa.git
+```
