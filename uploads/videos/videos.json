@@ -1,0 +1,18 @@
+[
+  {
+    "id": "e3d5f61c1330",
+    "title": "3 AI tools for students",
+    "category": "AI Tools",
+    "channel": "AI Tools Shorts",
+    "created_date": "2026-03-15T08:02:40.321Z",
+    "video_path": null,
+    "thumbnail_path": "/uploads/thumbnails/3-ai-tools-for-students-db7c4492dfd7.svg",
+    "script": "Hook: Stop scrolling. Here's the smartest part about 3 AI tools for students.\n\nBeat 1: Most people overcomplicate it, but the real win is using one clear idea people understand instantly.\n\nBeat 2: When you turn that into short, punchy content, watch time goes up and the message lands faster.\n\nBeat 3: That's exactly how creators turn simple topics into high-performing short videos.\n\nPayoff: Follow Nexa for more AI-powered content ideas you can turn into videos fast.",
+    "provider": "fallback",
+    "status": "partial",
+    "warnings": [
+      "Free mode is enabled. Nexa is using the built-in local script generator.",
+      "FFmpeg is not installed. Nexa saved the generated script and thumbnail, but could not render a video yet."
+    ]
+  }
+]

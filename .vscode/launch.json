@@ -1,0 +1,37 @@
+{
+  "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Full Stack: Nexa",
+      "configurations": [
+        "Run Next.js Dev Server",
+        "Launch Nexa in Chrome"
+      ]
+    }
+  ],
+  "configurations": [
+    {
+      "name": "Launch Nexa in Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/src",
+      "sourceMapPathOverrides": {
+        "webpack://_N_E/./src/*": "${webRoot}/*"
+      }
+    },
+    {
+      "name": "Debug Next.js Server",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Run Next.js Dev Server",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "./node_modules/.bin/next dev"
+    }
+  ]
+}
